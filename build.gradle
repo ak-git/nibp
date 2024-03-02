@@ -1,0 +1,95 @@
+import com.github.spotbugs.snom.Confidence
+
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'jacoco'
+    id 'application'
+    alias(libs.plugins.javamodularity.moduleplugin) apply false
+    alias(libs.plugins.sonarqube)
+    alias(libs.plugins.spotbugs)
+    alias(libs.plugins.ben.manes.versions)
+    alias(libs.plugins.nebula.lint)
+}
+
+spotbugs {
+    reportLevel = Confidence.valueOf('HIGH')
+}
+
+tasks.spotbugsMain {
+    reports.create('html') {
+        required = true
+        setStylesheet('fancy-hist.xsl')
+    }
+}
+
+sonar {
+    properties {
+        property 'sonar.projectKey', 'ak-git_SimpleApp'
+        property 'sonar.organization', 'ak-git'
+        property 'sonar.host.url', 'https://sonarcloud.io'
+        property 'sonar.branch.name', 'master'
+        property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
+    }
+}
+
+ext {
+    javaVersion = JavaVersion.VERSION_21
+}
+
+wrapper {
+    description 'Setup the Gradle wrapper'
+    gradleVersion = '8.6'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+}
+
+allprojects {
+    group = 'com.ak'
+    version = '2024.02.03'
+    apply plugin: 'idea'
+    idea {
+        module {
+            inheritOutputDirs = true
+        }
+    }
+    sourceSets {
+        main.output.resourcesDir = main.java.classesDirectory
+    }
+
+    apply plugin: 'java-library'
+    apply plugin: 'org.javamodularity.moduleplugin'
+    apply plugin: 'jacoco'
+
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+
+    jacoco {
+        toolVersion = '0.8.9'
+    }
+
+    jacocoTestReport {
+        reports {
+            xml.required = true
+        }
+    }
+
+    dependencies {
+        implementation libs.findbugs.jsr305
+        testImplementation(platform(libs.junit))
+        testImplementation libs.bundles.test
+    }
+
+    test {
+        forkEvery = 5
+        useJUnitPlatform()
+        testLogging {
+            events 'passed', 'skipped', 'failed'
+        }
+        maxHeapSize = '1G'
+    }
+}
+
+application {
+    mainModule = 'com.ak.app'
+    mainClass = 'com.ak.app.MainApp'
+}
