@@ -1,5 +1,8 @@
 package com.ak.nibp;
 
+import com.fazecast.jSerialComm.SerialPort;
+
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class MainApp {
@@ -7,6 +10,9 @@ public class MainApp {
   }
 
   public static void main(String[] args) {
-    Logger.getLogger(MainApp.class.getName()).info(() -> "Hello word 2024.02.03!");
+    Arrays.stream(SerialPort.getCommPorts())
+        .forEach(serialPort -> Logger.getLogger(MainApp.class.getName())
+            .info("[%s] %s".formatted(serialPort.getSystemPortName(), serialPort.getDescriptivePortName()))
+        );
   }
 }

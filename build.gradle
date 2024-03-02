@@ -64,6 +64,7 @@ allprojects {
 
     dependencies {
         implementation libs.findbugs.jsr305
+        implementation libs.jserial.comm
         testImplementation(platform(libs.junit))
         testImplementation libs.bundles.test
     }

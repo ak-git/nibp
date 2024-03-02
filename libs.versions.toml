@@ -8,6 +8,8 @@ jsr305 = '3.0.2'
 junit = '5.10.2'
 assertj = '3.25.3'
 
+jserial-comm = '2.10.4'
+
 [plugins]
 javamodularity-moduleplugin = { id = 'org.javamodularity.moduleplugin', version.ref = 'javamodularity-moduleplugin' }
 spotbugs = { id = 'com.github.spotbugs', version.ref = 'spotbugs' }
@@ -20,6 +22,8 @@ findbugs-jsr305 = { module = 'com.google.code.findbugs:jsr305', version.ref = 'j
 junit = { module = 'org.junit:junit-bom', version.ref = 'junit' }
 junit-jupiter = { module = 'org.junit.jupiter:junit-jupiter', version.ref = 'junit' }
 assertj = { module = 'org.assertj:assertj-core', version.ref = 'assertj' }
+
+jserial-comm = { module = 'com.fazecast:jSerialComm', version.ref = 'jserial-comm' }
 
 [bundles]
 test = ['junit-jupiter', 'assertj']
