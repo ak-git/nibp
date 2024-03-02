@@ -1,4 +1,4 @@
 @ParametersAreNonnullByDefault
-package com.ak.app;
+package com.ak.nibp;
 
 import javax.annotation.ParametersAreNonnullByDefault;

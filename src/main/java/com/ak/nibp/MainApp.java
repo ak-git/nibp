@@ -1,4 +1,4 @@
-package com.ak.app;
+package com.ak.nibp;
 
 import java.util.logging.Logger;
 
