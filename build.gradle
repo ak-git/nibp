@@ -80,6 +80,6 @@ allprojects {
 }
 
 application {
-    mainModule = 'com.ak.app'
-    mainClass = 'com.ak.nibp.MainApp'
+    mainModule = 'com.ak.nibp'
+    mainClass = 'com.ak.nibp.Application'
 }

@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
-class MainAppTest {
+class ApplicationTest {
   @Test
   void testMain() {
-    assertThatNoException().isThrownBy(() -> MainApp.main(new String[] {}));
+    assertThatNoException().isThrownBy(() -> Application.main(new String[] {}));
   }
 }
