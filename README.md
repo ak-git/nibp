@@ -2,40 +2,46 @@
 
 ## Raspberry Pi 4B
 
-### 1. Install SDKMAN
+![Raspberry Pi 4B GPIO](https://raspberrypi-ru.com/wp-content/uploads/2020/07/gpios-diagram-939x528.png)
 
-https://foojay.io/today/installing-java-with-sdkman-on-raspberry-pi/
-
-```bash
-$ sudo apt install zip
-
-$ curl -s "https://beta.sdkman.io" | bash
-```
-
-Open a new terminal or run this command
-
-```bash
-$ source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-$ sdk list java
-```
-
-### 2. Enable SNAPS
+### 1. Enable SNAPS
 
 https://snapcraft.io/install/gradle/raspbian
 
 ```bash
-$ sudo apt update
-
-$ sudo apt install snapd
+sudo apt update
 ```
 
 ```bash
-$ sudo reboot
+sudo apt install snapd
 ```
 
 ```bash
-$ sudo snap install core
+sudo reboot
+```
+
+```bash
+sudo snap install core
+```
+
+### 2. Install SDKMAN
+
+https://foojay.io/today/installing-java-with-sdkman-on-raspberry-pi/
+
+```bash
+sudo apt install zip
+```
+
+```bash
+curl -s "https://beta.sdkman.io" | bash
+```
+
+```bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+```
+
+```bash
+sdk list java
 ```
 
 ### 3. Install Gradle
@@ -43,11 +49,57 @@ $ sudo snap install core
 https://gradle.org/install/
 
 ```bash
-$ sdk install gradle 8.6
+sdk install gradle 8.6
 ```
 
 Verify your installation
 
 ```bash
-$ gradle -v
+gradle -v
+```
+
+### 4. Install Minicom
+
+![Check serial port](https://raspberrypi-ru.com/wp-content/uploads/2020/07/connexion_serie_test-939x528.jpg)
+
+https://raspberrypi-ru.com/включить-порт-последовательный-мали/
+
+```bash
+sudo apt update -y
+```
+
+```bash
+sudo apt install minicom -y
+```
+
+Find serial port
+
+```bash
+ls /dev
+```
+
+```bash
+sudo minicom -D /dev/serial0
+```
+
+### 5. Run program
+
+Clone from Git
+
+```bash
+git clone https://github.com/ak-git/nibp.git
+```
+
+```bash
+cd nibp
+```
+
+Build and run
+
+```bash
+gradle clean build
+```
+
+```bash
+gradle run
 ```
